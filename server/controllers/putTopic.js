@@ -13,7 +13,7 @@ async function putTopic (req, res) {
 
     await Topics.findByIdAndUpdate(topicId, { $inc: {score: quantity }});
     res.status(200);
-    res.send('Topic successfully updated!');
+    res.send({response: 'Topic successfully updated!'});
   } catch (err) {
     console.error(err);
     res.status(500);

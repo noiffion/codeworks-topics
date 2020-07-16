@@ -72,9 +72,11 @@ const st: Styles = {
 
 interface PropTypes {
   topic: TopicType;
+  deleteTopic: any;
+  updateScore: any;
 }
 
-const Topic: React.FC<PropTypes> = ({ topic }) => {
+const Topic: React.FC<PropTypes> = ({ topic, deleteTopic, updateScore }) => {
   return (
     <div style={st.topicCard}>
       <div style={st.voting}>
@@ -85,6 +87,7 @@ const Topic: React.FC<PropTypes> = ({ topic }) => {
             height="20"
             width="40"
             alt="up vote"
+            onClick={() => updateScore(topic, topic._id, true)}
           />
           <p style={st.scoreNumber}>{topic.score}</p>
           <img
@@ -93,6 +96,7 @@ const Topic: React.FC<PropTypes> = ({ topic }) => {
             height="20"
             width="40"
             alt="down vote"
+            onClick={() => updateScore(topic, topic._id, false)}
           />
         </div>
         <div style={st.topicInfo}>
@@ -109,6 +113,7 @@ const Topic: React.FC<PropTypes> = ({ topic }) => {
         height="30"
         width="60"
         alt="recycle bin"
+        onClick={() => deleteTopic(topic._id)}
       />
     </div>
   );

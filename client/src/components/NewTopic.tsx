@@ -29,10 +29,7 @@ const NewTopic: React.FC<PropTypes> = ({ newTopicSubmit, newTopicChange, newTopi
 
   return (
     <section style={st.newTopic}>
-      <form style={st.newTopicForm} onSubmit={(event) => {
-          console.log('hello');
-          newTopicSubmit(event);
-        }}>
+      <form style={st.newTopicForm} onSubmit={(event) => newTopicSubmit(event)}>
         <input type="text" value={newTopicName} onChange={newTopicChange} />
         <input type="submit" value="Add Topic"></input>
       </form>

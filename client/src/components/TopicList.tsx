@@ -33,7 +33,7 @@ const TopicList: React.FC<PropTypes> = () => {
       .catch(console.error);
   }, []);
 
-  const newTopicSubmit = (event: React.FormEvent<HTMLInputElement>) => {
+  const newTopicSubmit = (event: React.FormEvent<HTMLInputElement>): void => {
     event.preventDefault();
     const newTopic: TopicType = {
       topicName: newTopicName,
@@ -41,8 +41,32 @@ const TopicList: React.FC<PropTypes> = () => {
       score: 0,
     }
     ApiClient.newTopic(newTopic)
-      .then(newTopic => setTopicList(topicList => [...topicList, newTopic]))
+      .then(newTopic => {
+        setTopicList(topicList => [...topicList, newTopic]);
+        setNewTopicName('');
+      })
       .catch(console.error);
+  }
+
+  const deleteTopic = (topicId: string): void => {
+    ApiClient.deleteTopic(topicId)
+      .then(resp => {
+        const reducedTopicList = topicList.filter(topic => topic._id !== topicId);
+        setTopicList(reducedTopicList);
+      })
+      .catch(console.error)
+  }
+
+  const updateScore = (topic: TopicType, topicId: string, up: boolean): void => {
+    ApiClient.updateTopic(topicId, up ? 'up' : 'down')
+      .then(resp => {
+        const newList = topicList.map(topic => {
+          if (topic._id === topicId) up ? topic.score++ : topic.score--;
+          return topic;
+        });
+        setTopicList(newList);
+      })
+      .catch(console.error)
   }
 
   const newTopicChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -50,7 +74,14 @@ const TopicList: React.FC<PropTypes> = () => {
     setNewTopicName(newTopicName => newName);
   }
 
-  const topicBoxes = topicList.map(topic => <Topic key={topic._id} topic={topic}/>);
+  const topicBoxes = topicList.map(topic => (
+    <Topic
+      key={topic._id}
+      topic={topic}
+      deleteTopic={deleteTopic}
+      updateScore={updateScore}
+    />
+  ));
   return (
     <main style={st.main}>
       <NewTopic
