@@ -3,21 +3,15 @@ import TopicType from '../types/topicType';
 
 const API_URL = 'http://localhost:3030';
 
-interface FetchOptions {
-  method: string;
-  headers?: object;
-  body?: string;
-}
-
 export default {
   getTopics: async () => {
-    const init: FetchOptions = {
+    const init: RequestInit = {
       method: 'GET',
     }
     return await defaultRequest('topics', init);
   },
   newTopic: async (data: TopicType) => {
-    const init: FetchOptions = {
+    const init: RequestInit = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -27,13 +21,13 @@ export default {
     return await defaultRequest('topics', init);
   },
   updateTopic: async (topicId: string, upDown: string) => {
-    const init: FetchOptions = {
+    const init: RequestInit = {
       method: 'PUT',
     }
     return await defaultRequest(`topics/${topicId}/${upDown}`, init);
   },
   deleteTopic: async (topicId: string) => {
-    const init: FetchOptions = {
+    const init: RequestInit = {
       method: 'DELETE',
     }
     return await defaultRequest(`topics/${topicId}`, init);
@@ -41,7 +35,7 @@ export default {
 }
 
 
-const defaultRequest = async (path: string, init: object) => {
+const defaultRequest = async (path: string, init: RequestInit) => {
   return fetch(`${API_URL}/${path}`, init)
     .then(result => result.status >= 400 ? Promise.reject(result) : result)
     .then(result => result.json())
