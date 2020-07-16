@@ -8,7 +8,7 @@ async function putTopic (req, res) {
     const { topicId, dir } = req.params;
     const quantity = dir === 'up' ? 1 : -1;
     await Topics.findByIdAndUpdate(topicId, { $inc: {score: quantity }});
-    res.status(204);
+    res.status(200);
     res.send('Topic successfully updated!');
   } catch (err) {
     console.error(err);
