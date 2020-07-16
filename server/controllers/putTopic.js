@@ -1,4 +1,7 @@
-function putTopic() {
+const Topics = require('../models');
+
+
+async function putTopic (req, res) {
 
 }
 

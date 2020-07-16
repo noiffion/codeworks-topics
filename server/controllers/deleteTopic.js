@@ -1,4 +1,7 @@
-function deleteTopic() {
+const Topics = require('../models');
+
+
+async function deleteTopic (req, res) {
 
 }
 
