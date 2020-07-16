@@ -6,7 +6,6 @@ const PORT = 3030;
 const router = require('./router');
 
 app.use(router);
-console.log(router);
 app.use(express.json());
 
 app.listen(PORT, () => {
