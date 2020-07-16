@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import TopicList from './components/TopicList';
+import * as serviceWorker from './serviceWorker/serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TopicList />
   </React.StrictMode>,
   document.getElementById('root')
 );
