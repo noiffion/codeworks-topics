@@ -13,7 +13,6 @@ interface Styles {
   voting: CSS.Properties;
   score: CSS.Properties;
   scoreImg: CSS.Properties;
-  scoreP: CSS.Properties;
   topicInfo: CSS.Properties;
   topicInfoP: CSS.Properties;
   topicInfoH3: CSS.Properties;
@@ -38,16 +37,17 @@ const st: Styles = {
   score: {
     display: 'flex',
     flexDirection: 'column',
-    textAlign: 'center',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center'
   },
   scoreImg: {
     cursor: 'pointer',
   },
-  scoreP: {
-    margin: '0.5vh 0',
+  scoreNumber: {
+    margin: '1.2vh 0',
     padding: '0',
+    fontWeight: 'bold',
+    fontSize: '1.2rem',
   },
   topicInfo: {
     marginLeft: '5vw',
@@ -58,10 +58,6 @@ const st: Styles = {
   },
   topicInfoH3: {
     cursor: 'pointer',
-  },
-  scoreNumber: {
-    fontWeight: 'bold',
-    fontSize: '1.2rem',
   },
   createdOn: {
     color: 'slategray',
@@ -83,9 +79,21 @@ const Topic: React.FC<PropTypes> = ({ topic }) => {
     <div style={st.topicCard}>
       <div style={st.voting}>
         <div style={st.score}>
-          <img style={st.scoreImg} src={upImgSrc} height="20" width="40" alt="up vote"/>
+          <img
+            style={st.scoreImg}
+            src={upImgSrc}
+            height="20"
+            width="40"
+            alt="up vote"
+          />
           <p style={st.scoreNumber}>{topic.score}</p>
-          <img style={st.scoreImg} src={downImgSrc} height="20" width="40" alt="down vote"/>
+          <img
+            style={st.scoreImg}
+            src={downImgSrc}
+            height="20"
+            width="40"
+            alt="down vote"
+          />
         </div>
         <div style={st.topicInfo}>
           <h3 style={st.topicInfoH3}>{topic.topicName}</h3>
@@ -95,7 +103,13 @@ const Topic: React.FC<PropTypes> = ({ topic }) => {
           </p>
         </div>
       </div>
-      <img style={st.bin} src={recBinSrc} height="30" width="60" alt="recycle bin"/>
+      <img
+        style={st.bin}
+        src={recBinSrc}
+        height="30"
+        width="60"
+        alt="recycle bin"
+      />
     </div>
   );
 }
