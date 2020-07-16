@@ -1,6 +1,10 @@
 import React from 'react';
+import moment from 'moment';
 import TopicType from '../types/topicType';
 import CSS from 'csstype';
+import upImgSrc from "../assets/images/up.png";
+import downImgSrc from "../assets/images/down.png";
+import recBinSrc from "../assets/images/recycle_bin.png";
 
 
 // style declarations
@@ -79,23 +83,21 @@ const Topic: React.FC<PropTypes> = ({ topic }) => {
     <div style={st.topicCard}>
       <div style={st.voting}>
         <div style={st.score}>
-          <img style={st.scoreImg} src="../../assets/images/up.png" height="20" width="40" alt="up vote"/>
+          <img style={st.scoreImg} src={upImgSrc} height="20" width="40" alt="up vote"/>
           <p style={st.scoreNumber}>{topic.score}</p>
-          <img style={st.scoreImg} src="../../assets/images/down.png" height="20" width="40" alt="down vote"/>
+          <img style={st.scoreImg} src={downImgSrc} height="20" width="40" alt="down vote"/>
         </div>
         <div style={st.topicInfo}>
           <h3 style={st.topicInfoH3}>{topic.topicName}</h3>
-          <p style={st.topicInfoP}><span style={st.createdOn}>Created on:</span> {topic.createdDate}</p>
+          <p style={st.topicInfoP}>
+            <span style={st.createdOn}>Created on:</span>
+            {moment(topic.createdDate).format('Do MMM')}
+          </p>
         </div>
       </div>
-      <img style={st.bin} src="../../assets/images/recycle_bin.png" height="30" width="60" alt="recycle bin"/>
+      <img style={st.bin} src={recBinSrc} height="30" width="60" alt="recycle bin"/>
     </div>
   );
 }
 
 export default Topic;
-
-
-/*
-
-*/
