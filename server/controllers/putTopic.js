@@ -6,7 +6,11 @@ const Topics = require('../models');
 async function putTopic (req, res) {
   try {
     const { topicId, dir } = req.params;
-    const quantity = dir === 'up' ? 1 : -1;
+
+    let quantity = 0;
+    if (dir === 'up') quantity = 1;
+    else if (dir === 'down') quantity = -1;
+
     await Topics.findByIdAndUpdate(topicId, { $inc: {score: quantity }});
     res.status(200);
     res.send('Topic successfully updated!');
