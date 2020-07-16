@@ -87,7 +87,7 @@ const Topic: React.FC<PropTypes> = ({ topic, deleteTopic, updateScore }) => {
             height="20"
             width="40"
             alt="up vote"
-            onClick={() => updateScore(topic, topic._id, true)}
+            onClick={() => updateScore(topic._id, true)}
           />
           <p style={st.scoreNumber}>{topic.score}</p>
           <img
@@ -96,7 +96,7 @@ const Topic: React.FC<PropTypes> = ({ topic, deleteTopic, updateScore }) => {
             height="20"
             width="40"
             alt="down vote"
-            onClick={() => updateScore(topic, topic._id, false)}
+            onClick={() => updateScore(topic._id, false)}
           />
         </div>
         <div style={st.topicInfo}>

@@ -57,7 +57,7 @@ const TopicList: React.FC<PropTypes> = () => {
       .catch(console.error)
   }
 
-  const updateScore = (topic: TopicType, topicId: string, up: boolean): void => {
+  const updateScore = (topicId: string, up: boolean): void => {
     ApiClient.updateTopic(topicId, up ? 'up' : 'down')
       .then(resp => {
         const newList = topicList.map(topic => {
