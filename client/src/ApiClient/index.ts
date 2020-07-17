@@ -10,7 +10,7 @@ export default {
     }
     return await defaultRequest('topics', init);
   },
-  newTopic: async (data: TopicType) => {
+  newTopic: async (data: object) => {
     const init: RequestInit = {
       method: 'POST',
       headers: {

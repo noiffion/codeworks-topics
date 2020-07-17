@@ -5,6 +5,10 @@ import CSS from 'csstype';
 import upImgSrc from "../assets/images/up.png";
 import downImgSrc from "../assets/images/down.png";
 import recBinSrc from "../assets/images/recycle_bin.png";
+import {
+  DeleteTopic,
+  UpdateScore
+} from '../types/functionTypes';
 
 
 // style declarations
@@ -72,8 +76,8 @@ const st: Styles = {
 
 interface PropTypes {
   topic: TopicType;
-  deleteTopic: any;
-  updateScore: any;
+  deleteTopic: DeleteTopic;
+  updateScore: UpdateScore;
 }
 
 const Topic: React.FC<PropTypes> = ({ topic, deleteTopic, updateScore }) => {

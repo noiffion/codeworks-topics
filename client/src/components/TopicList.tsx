@@ -4,6 +4,12 @@ import CSS from 'csstype';
 import TopicType from '../types/topicType';
 import Topic from './Topic';
 import NewTopic from './NewTopic';
+import {
+  NewTopicSubmit,
+  NewTopicChange,
+  DeleteTopic,
+  UpdateScore
+} from '../types/functionTypes';
 
 
 // style declarations
@@ -33,9 +39,14 @@ const TopicList: React.FC<PropTypes> = () => {
       .catch(console.error);
   }, []);
 
-  const newTopicSubmit = (event: React.FormEvent<HTMLInputElement>): void => {
+  const newTopicChange: NewTopicChange = (event) => {
+    const newName = event.target.value;
+    setNewTopicName(newTopicName => newName);
+  }
+
+  const newTopicSubmit: NewTopicSubmit = (event) => {
     event.preventDefault();
-    const newTopic: TopicType = {
+    const newTopic: object = {
       topicName: newTopicName,
       createdDate: (new Date()).toLocaleDateString(),
       score: 0,
@@ -48,7 +59,7 @@ const TopicList: React.FC<PropTypes> = () => {
       .catch(console.error);
   }
 
-  const deleteTopic = (topicId: string): void => {
+  const deleteTopic: DeleteTopic = (topicId) => {
     ApiClient.deleteTopic(topicId)
       .then(resp => {
         const reducedTopicList = topicList.filter(topic => topic._id !== topicId);
@@ -57,7 +68,7 @@ const TopicList: React.FC<PropTypes> = () => {
       .catch(console.error)
   }
 
-  const updateScore = (topicId: string, up: boolean): void => {
+  const updateScore: UpdateScore = (topicId, up) => {
     ApiClient.updateTopic(topicId, up ? 'up' : 'down')
       .then(resp => {
         const newList = topicList.map(topic => {
@@ -69,10 +80,6 @@ const TopicList: React.FC<PropTypes> = () => {
       .catch(console.error)
   }
 
-  const newTopicChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newName = event.target.value;
-    setNewTopicName(newTopicName => newName);
-  }
 
   const topicBoxes = topicList.map(topic => (
     <Topic
